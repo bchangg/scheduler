@@ -1,7 +1,6 @@
 @import "styles/variables.scss";
 @import "styles/mixins.scss";
 @import "styles/animations.scss";
-
 $appointment-height: 11rem;
 
 .appointment {
@@ -63,13 +62,7 @@ $appointment-height: 11rem;
 
     &--show {
       color: rgba($booked-color, $active-opacity);
-      background: linear-gradient(
-        90deg,
-        rgba($booked-color, $active-opacity),
-        rgba($booked-color, $active-opacity) 8px,
-        rgba($booked-color, $inactive-opacity) 0,
-        rgba($booked-color, $inactive-opacity)
-      );
+      background: linear-gradient(90deg, rgba($booked-color, $active-opacity), rgba($booked-color, $active-opacity) 8px, rgba($booked-color, $inactive-opacity) 0, rgba($booked-color, $inactive-opacity));
 
       &:hover {
         color: darken($white, 5%);
@@ -86,7 +79,6 @@ $appointment-height: 11rem;
 
     &--confirm {
       @include border-card($danger-color);
-
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -95,7 +87,6 @@ $appointment-height: 11rem;
 
     &--error {
       @include border-card($error-color);
-
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -157,8 +148,8 @@ $appointment-height: 11rem;
 
     &-close {
       @include button-inactive--opacity;
-
       align-self: flex-start;
+
       &:hover {
         @include button-active--opacity;
       }
