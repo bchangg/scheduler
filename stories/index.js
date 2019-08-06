@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -132,7 +132,7 @@ storiesOf("InterviewerList", module)
   .add("Preselected", () => (
     <InterviewerList
       interviewers={interviewers}
-      interviewer={3}
+      value={3}
       setInterviewer={action("setInterviewer")}
     />
   ));
@@ -142,6 +142,51 @@ storiesOf("Appointment", module)
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
   .add("Appointment", () => <Appointment />)
-  .add("Appointment with Time", () => <Appointment time="12pm" />)
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="12pm" /> 
+      <Appointment id="last" time="1pm"/>
+    </Fragment>
+  ))
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="12pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer: "Sylvia Palmer" }}
+      />
+      <Appointment id="last" time="1pm" />
+    </Fragment>
+  ))
   .add("Header", () => <Header time="12pm" />)
-  .add("Empty", () => <Empty onAdd={()=>action("emptyClick")} />);
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
+  .add("Show", () => <Show 
+    student="Lydia Miller-Jones"
+    interviewer={{
+      id:1,
+      name: "Sylvia Palmer",
+      avatar: "https://i.imgur.com/LpaY82x.png"
+    }}
+    onEdit={action("onEdit")}
+    onDelete={action("onDelete")}
+  />)
+  .add("Confirm", () => <Confirm
+    message="Delete the appointment?"
+    onCancel={action("onCancel")}
+    onConfirm={action("onConfirm")}
+  />)
+  .add("Status", () => <Status message="Deleting" />)
+  .add("Error Saving", () => <Error message="Could not save appointment" onClose={action("onClose")} />)
+  .add("Error Deleting", () => <Error message="Could not delete appointment" onClose={action("onClose")} />)
+  .add("Form CREATE", () => <Form 
+    interviewers={interviewers}
+    onSave={action("onSave")}
+    onCancel={action("onCancel")}
+  />)
+  .add("Form EDIT", () => <Form 
+    name="Brian"
+    value={3}
+    interviewers={interviewers}
+    onSave={action("onSave")}
+    onCancel={action("onCancel")}
+  />);

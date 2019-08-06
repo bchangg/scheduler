@@ -19,13 +19,12 @@ export default function InterviewerList(props) {
           return <InterviewerListItem
             name={interviewer.name}
             avatar={interviewer.avatar}
-            selected={props.interviewer === interviewer.id}
+            selected={props.value === interviewer.id}
             setInterviewer={() => {
-              return props.setInterviewer(interviewer.id);
+              props.onChange(interviewer.id);
             }}
           />
         })}
-          
       </ul>
     </section>
   );
