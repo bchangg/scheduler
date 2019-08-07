@@ -5,10 +5,10 @@ import 'components/InterviewerList.scss';
 import InterviewerListItem from 'components/InterviewerListItem';
 
 /*props
-interviewers: array of interviewers
-setInterviewer: function
+id: number
+time: string
+interview: object with keys "student" and "interviewer"
 */
-
 
 export default function InterviewerList(props) {
   return (
