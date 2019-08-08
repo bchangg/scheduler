@@ -20,19 +20,17 @@ export default function DayListItem(props) {
     switch (props.spots) {
       case 0:
         return `no spots remaining`;
-        break;
       case 1:
         return `1 spot remaining`
-        break;
       default:
         return `${props.spots} spots remaining`;
     }
   }
 
   return (
-    <article className={itemClass} onClick={props.setDay}>
+    <li className={itemClass} onClick={props.setDay}>
       <h2>{props.name}</h2>
       <h4>{formatSpots()}</h4>
-    </article>
+    </li>
   )
 }

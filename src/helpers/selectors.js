@@ -10,7 +10,7 @@ function getAppointmentsForDay(state, day) {
   return resultArray;
 }
 
-function getInterview(state, interview) {
+function getInterview(state, interview) { 
   if (interview) {
     return ({
       student: interview.student,
@@ -21,4 +21,16 @@ function getInterview(state, interview) {
   }
 }
 
-export { getAppointmentsForDay, getInterview }
+function getInterviewersForDay(state, day) {
+  const resultDay = state.days.find((dayEntry) => {
+    return dayEntry.name === day;
+  });
+  const interviewersArray = resultDay ? resultDay.interviewers : [];
+  const resultArray = [];
+  interviewersArray.forEach((interviewersKey) => {
+    resultArray.push(state.interviewers[interviewersKey]) 
+  })
+  return resultArray;
+}
+
+export { getAppointmentsForDay, getInterviewersForDay, getInterview }
