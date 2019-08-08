@@ -14,7 +14,24 @@ export default function Application(props) {
     interviewers: {}
   })
 
-  const setDay = day => setState(currentState => ({ ...currentState, day })); 
+  const setDay = day => setState(currentState => ({ ...currentState, day }));
+
+  const schedule = getAppointmentsForDay(state, state.day).map((appointmentEntry) => {
+    const interview = getInterview(state, appointmentEntry.interview);
+    const interviewers = getInterviewersForDay(state, state.day);
+    return (
+      <Appointment 
+        {...appointmentEntry}
+        key={appointmentEntry.id} 
+        interview={interview}
+        interviewers={interviewers}
+      />
+    );
+  })
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
 
   useEffect(() => {
     Promise.all([
@@ -25,12 +42,6 @@ export default function Application(props) {
       setState(state => ({ ...state, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
     })
   }, [])
-  
-  const schedule = getAppointmentsForDay(state, state.day).map((appointmentEntry) => {
-    const interview = getInterview(state, appointmentEntry.interview);
-    const interviewers = getInterviewersForDay(state, state.day);
-    return <Appointment key={appointmentEntry.id} {...appointmentEntry} interview={interview} interviewers={interviewers} />;
-  })
 
   return (
     <main className="layout">
