@@ -31,24 +31,24 @@ export default function Appointment(props) {
       interviewer
     }
     transition(SAVE);
-    props.bookInterview && props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
       })
       .catch(() => {
-        transition(ERROR_SAVE)
+        transition(ERROR_SAVE, true)
       });
   }
 
-  function remove() {
+  function destroy(event) {
     const interview = null;
-    transition(DELETE);
-    props.deleteInterview && props.deleteInterview(props.id, interview)
+    transition(DELETE, true);
+    props.deleteInterview(props.id, interview)
       .then(() => {
         transition(EMPTY)
       })
       .catch(() => {
-        transition(ERROR_DELETE)
+        transition(ERROR_DELETE, true)
       });
   }
 
@@ -75,16 +75,16 @@ export default function Appointment(props) {
           <Status message={"Deleting"} />
         }
         {mode === CONFIRM &&
-          <Confirm message={confirmMessage} onConfirm={() => remove()} onCancel={()=>back()}/>
+          <Confirm message={confirmMessage} onConfirm={() => destroy()} onCancel={()=>back()}/>
         }
         {mode === EDIT &&
           <Form name={props.interview.student} onSave={(name, interviewer) => save(name, interviewer)} onCancel={() => back()} value={props.interview.interviewer.id} interviewers={props.interviewers}/>
         }
         {mode === ERROR_SAVE &&
           (props.interview ? 
-            <Error message="Error on save! Please try again" onClose={() => transition(SHOW)}/>
+            <Error message="Error on save! Please try again" onClose={() => back()}/>
             :
-            <Error message="Error on save! Please try again" onClose={() => transition(EMPTY)}/>
+            <Error message="Error on save! Please try again" onClose={() => back()}/>
           )
         }
         {mode === ERROR_DELETE &&
