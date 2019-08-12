@@ -29,8 +29,8 @@ export default function Appointment(props) {
       student: name,
       interviewer
     }
-    console.log(props.interview);
-    if (!props.interview) {
+
+    if (!interview.student || !interview.interviewer) {
       transition(ERROR_SAVE, true);
     } else {
       transition(SAVE);
