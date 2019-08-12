@@ -14,15 +14,16 @@ export default function Application(props) {
     state,
     setDay,
     bookInterview,
-    deleteInterview,
-    editInterview
+    deleteInterview
   } = useApplicationData();
 
-  const schedule = getAppointmentsForDay(state, state.day).map((appointmentEntry) => {
-    const interview = getInterview(state, appointmentEntry.interview);
-    const interviewers = getInterviewersForDay(state, state.day);
-    return (
-      <Appointment 
+  const schedule = getAppointmentsForDay(state, state.day)
+    .map((appointmentEntry) => {
+      const interview = getInterview(state, appointmentEntry.interview);
+      const interviewers = getInterviewersForDay(state, state.day);
+      console.log(state.days);
+      return (
+        <Appointment
         {...appointmentEntry}
         key={appointmentEntry.id}
         interview={interview}
@@ -30,8 +31,8 @@ export default function Application(props) {
         bookInterview={bookInterview}
         deleteInterview={deleteInterview}
       />
-    );
-  })
+      );
+    })
 
   return (
     <main className="layout">

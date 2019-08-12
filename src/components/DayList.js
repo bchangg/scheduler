@@ -20,7 +20,7 @@ export default function DayList(props) {
             name={day.name}
             spots={day.spots}
             setDay={() => {
-              return props.setDay(day.name)
+              return props.setDay(day.name);
             }}
           />
         )

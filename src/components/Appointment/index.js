@@ -21,7 +21,6 @@ const ERROR_DELETE = "ERROR_DELETE";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
 const confirmMessage = "Are you sure?";
-
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
 
@@ -57,7 +56,7 @@ export default function Appointment(props) {
       <Header time={props.time}/>
         {mode === EMPTY && <Empty onAdd={() => transition(CREATE)}/>}
         {mode === SHOW && (
-          <Show 
+          <Show
             appointment={props.id}
             student={props.interview.student}
             interviewer={props.interview.interviewer}
@@ -65,13 +64,13 @@ export default function Appointment(props) {
             onEdit={() => transition(EDIT)}
           />
         )}
-        {mode === CREATE && 
+        {mode === CREATE &&
           <Form onSave={(name, interviewer) => save(name, interviewer)} onCancel={() => back()} interviewers={props.interviewers}/>
         }
-        {mode === SAVE && 
+        {mode === SAVE &&
           <Status message={"Saving"} />
         }
-        {mode === DELETE && 
+        {mode === DELETE &&
           <Status message={"Deleting"} />
         }
         {mode === CONFIRM &&
@@ -81,7 +80,7 @@ export default function Appointment(props) {
           <Form name={props.interview.student} onSave={(name, interviewer) => save(name, interviewer)} onCancel={() => back()} value={props.interview.interviewer.id} interviewers={props.interviewers}/>
         }
         {mode === ERROR_SAVE &&
-          (props.interview ? 
+          (props.interview ?
             <Error message="Error on save! Please try again" onClose={() => back()}/>
             :
             <Error message="Error on save! Please try again" onClose={() => back()}/>
