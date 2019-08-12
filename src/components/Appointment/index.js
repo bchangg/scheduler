@@ -29,14 +29,19 @@ export default function Appointment(props) {
       student: name,
       interviewer
     }
-    transition(SAVE);
-    props.bookInterview(props.id, interview)
-      .then(() => {
-        transition(SHOW);
-      })
-      .catch(() => {
-        transition(ERROR_SAVE, true)
-      });
+    console.log(props.interview);
+    if (!props.interview) {
+      transition(ERROR_SAVE, true);
+    } else {
+      transition(SAVE);
+      props.bookInterview(props.id, interview)
+        .then(() => {
+          transition(SHOW);
+        })
+        .catch(() => {
+          transition(ERROR_SAVE, true)
+        });
+    }
   }
 
   function destroy(event) {
