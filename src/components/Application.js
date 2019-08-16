@@ -7,7 +7,7 @@ import DayList from "components/DayList";
 import Appointment from "components/Appointment";
 import useApplicationData from "hooks/useApplicationData";
 
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'http://scheduler-lighthouse-labs.herokuapp.com';
 
 export default function Application(props) {
   const {
